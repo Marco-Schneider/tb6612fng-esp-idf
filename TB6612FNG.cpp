@@ -16,7 +16,7 @@ Motor::Motor(gpio_num_t IN1, gpio_num_t IN2, gpio_num_t PWM, gpio_num_t STBY,
   mcpwm_gpio_init(unit, iosig, PWM);
 
   mcpwm_config_t config;
-  config.frequency = DEFAULT_FREQ;
+  config.frequency = DEFAULT_FREQUENCY;
   config.cmpr_a = 0;
   config.cmpr_b = 0;
   config.counter_mode = MCPWM_UP_COUNTER;
