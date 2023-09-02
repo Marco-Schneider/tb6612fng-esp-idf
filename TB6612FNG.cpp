@@ -25,8 +25,22 @@ Motor::Motor(gpio_num_t IN1, gpio_num_t IN2, gpio_num_t PWM, gpio_num_t STBY,
   mcpwm_init(unit, timer, &config);
 }
 
-MOTOR::~MOTOR() {
+Motor::~Motor() {
   gpio_set_level(IN1, 0);
   gpio_set_level(IN2, 0);
   mcpwm_stop(unit, timer);
+}
+
+Motor::drive(float speed) {
+  gpio_set_level(STBY, 1);
+  if(speed >= 0) {
+    gpio_set_level(IN1, 0);
+    gpio_set_level(IN2, 1);
+    mcpwm_set_duty(unit, timer, op, speed);
+  } 
+  else {
+    gpio_set_level(IN1, 1);
+    gpio_set_level(IN2, 0);
+    mcpwm_set_duty(unit, timer, op, -speed);
+  }
 }
