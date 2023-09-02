@@ -31,7 +31,7 @@ Motor::~Motor() {
   mcpwm_stop(unit, timer);
 }
 
-Motor::drive(float speed) {
+void Motor::drive(float speed) {
   gpio_set_level(STBY, 1);
   if(speed >= 0) {
     gpio_set_level(IN1, 0);
@@ -43,4 +43,8 @@ Motor::drive(float speed) {
     gpio_set_level(IN2, 0);
     mcpwm_set_duty(unit, timer, op, -speed);
   }
+}
+
+void Motor::standby() {
+  gpio_set_level(STBY, 0);
 }
