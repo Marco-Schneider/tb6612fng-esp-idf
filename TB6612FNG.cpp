@@ -16,6 +16,8 @@ Motor::Motor(gpio_num_t IN1, gpio_num_t IN2, gpio_num_t PWM, gpio_num_t STBY,
 
   gpio_set_direction(IN1, GPIO_MODE_OUTPUT);
   gpio_set_direction(IN2, GPIO_MODE_OUTPUT);
+  gpio_set_level(IN1, 0);
+  gpio_set_level(IN2, 1);
 
   mcpwm_gpio_init(unit, iosig, PWM);
 
