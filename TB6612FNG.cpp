@@ -2,13 +2,14 @@
 
 #define DEFAULT_FREQUENCY 10000
 
-Motor::Motor(gpio_num_t IN1, gpio_num_t IN2, gpio_num_t PWM, gpio_num_t STBY,
+Motor::Motor(gpio_num_t IN1, gpio_num_t IN2, gpio_num_t PWM, gpio_num_t STBY, int offset,
              mcpwm_unit_t unit, mcpwm_timer_t timer, mcpwm_io_signals_t iosig, mcpwm_operator_t op) {
   
   this->IN1 = IN1;
   this->IN2 = IN2;
   this->PWM = PWM;
   this->STBY = STBY;
+  this->offset = offset;
   this->unit = unit;
   this->timer = timer;
   this->iosig = iosig;
@@ -40,6 +41,7 @@ Motor::~Motor() {
 
 void Motor::drive(float speed) {
   gpio_set_level(STBY, 1);
+  speed = speed * offset;
   if(speed >= 0) {
     gpio_set_level(IN1, 0);
     gpio_set_level(IN2, 1);

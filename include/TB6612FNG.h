@@ -21,7 +21,7 @@
 class Motor 
 {
   public:
-    Motor(gpio_num_t IN1, gpio_num_t IN2, gpio_num_t PWM, gpio_num_t STBY,
+    Motor(gpio_num_t IN1, gpio_num_t IN2, gpio_num_t PWM, gpio_num_t STBY, int offset,
       mcpwm_unit_t unit, mcpwm_timer_t timer, mcpwm_io_signals_t iosig, mcpwm_operator_t op);
 
     ~Motor();
@@ -35,7 +35,7 @@ class Motor
     
   private:
     gpio_num_t IN1, IN2, PWM, STBY;
-
+    int offset;
     mcpwm_unit_t unit;
     mcpwm_timer_t timer;
     mcpwm_io_signals_t iosig;
